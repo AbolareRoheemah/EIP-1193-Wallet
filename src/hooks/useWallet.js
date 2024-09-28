@@ -18,7 +18,7 @@ export const useWallet = () => {
                     method: "eth_getBalance",
                     params: [accounts[0], 'latest'],
                 })
-                setBalance(ethers.utils.formatEther(accountBalance))
+                setBalance(parseFloat(accountBalance) / 10 ** 18)
                 console.log(`chainId: ${parseInt(chainId, 16)}`)
 
                 const chainId = await ethereum.request({
@@ -40,7 +40,7 @@ export const useWallet = () => {
                     method: "eth_getBalance",
                     params: [userAddress, 'latest'],
                 })
-                return ethers.utils.formatEther(accountBalance);
+                return parseFloat(accountBalance) / 10 ** 18;
             } catch (error) {
                 console.error('Error fetching balance', error);
                 return 'Something went wrong';
